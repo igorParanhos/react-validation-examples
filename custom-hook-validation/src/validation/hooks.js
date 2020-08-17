@@ -1,14 +1,16 @@
-// Use case example
-// const [value, setValue, validationErrors] = useValidtion([...validationRules])
-
 import { useState } from "react";
 
 export const useField = (initialValue, validationRules) => {
   const [value, setValue] = useState(initialValue);
+  const [touched, setTouched] = useState(false);
 
-  const validationErrors = validationRules.filter(r => !r.fn(value)).map(r => r.errorMessage)
+  if (!!value && !touched)
+    setTouched(true)
+
+  const validationErrors = touched ? validationRules
+    .filter((rule) => !rule.fn(value)).map((rule) => rule.errorMessage) : []
 
   const props = { style: {} }
 
-  return [value, setValue, validationErrors, props]
+  return [value, setValue, validationErrors, touched, props]
 }

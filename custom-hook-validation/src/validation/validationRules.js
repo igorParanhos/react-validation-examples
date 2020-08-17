@@ -1,14 +1,15 @@
 import { cleanEmptyStringArray } from './utils';
 
 export const string = {
-  isNotEmpty: v => v.length > 0,
-  hasWordCountEqualTo: wordCount => v => cleanEmptyStringArray(v.split(' ')).length >= wordCount
+  isNotEmpty: (value) => (value.length > 0),
+  isDigit: (value) => (!value.match(/\D/g)),
+  hasWordCountEqualTo: (wordCount) => (value) => (cleanEmptyStringArray(value.split(' ')).length >= wordCount),
 }
 
 export const select = {
-  isSelected: v => !!v.length,
+  isSelected: (value) => (!!value.length),
 }
 
 export const radio = {
-  isSelected: v => !!v,
+  isSelected: (value) => (!!value),
 }
